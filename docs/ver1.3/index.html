@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Origin Trial Token, feature = WebUSB (For Chrome M57+), origin = https://webusb.github.io, expires = 2017-06-19 -->
+    <meta http-equiv="origin-trial" data-feature="WebUSB (For Chrome M57+)" data-expires="2017-06-19" content="Ag83MurQOa5N4SKRCqqtSlbycfe08s5LgUiqEI7J3jTk2NEIpRp7SLPz2i+EBDuXyf+AeRMdD6BI++kTSJmGzQEAAABReyJvcmlnaW4iOiJodHRwczovL3dlYnVzYi5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IldlYlVTQjIiLCJleHBpcnkiOjE0OTc4OTM2OTV9">
+    <title>RGB LED</title>
+    <script src="../hidtaiko.js"></script>
+    <script src="hidtaiko3.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    
+    <center> <h1><b>ver1.3接続器 感度調節</b></h1></center>
+    <h2></h2>
+    <p>
+      [save]を押した後3秒ほど時間をおいてから接続を切ってください
+    <p>
+      <button id="connect">Connect</button> <span id="status"></span>
+    </p>
+    <button id="save">save</button>
+
+    <div class="slider-container">
+    a0（右縁）
+      <input type="range" min="1" max="100" value="0" id="dx0"/>
+      <span id="valueDx0" class="slider-value">10</span>
+  </div> 
+  
+  <div class="slider-container">
+    a1（右面）
+      <input type="range" min="1" max="100" value="0" id="dx1"/>
+      <span id="valueDx1" class="slider-value">0</span>
+  </div>
+  
+  <div class="slider-container">
+    a2（左面）
+      <input type="range" min="1" max="100" value="0" id="dx2"/>
+      <span id="valueDx2" class="slider-value">0</span>
+  </div>
+  
+  <div class="slider-container">
+    a3（左縁）
+      <input type="range" min="1" max="100" value="0" id="dx3"/>
+      <span id="valueDx3" class="slider-value">0</span>
+  </div>
+  <h4>↓入力クールタイム↓</h4>
+
+  <div class="slider-container">
+    A
+    <input type="range" min="1" max="100" value="0" id="dxa"/>
+    <span id="valueDxa" class="slider-value">0</span>
+</div>
+
+<div class="slider-container">
+  B
+  <input type="range" min="1" max="100" value="0" id="dxb"/>
+  <span id="valueDxb" class="slider-value">0</span>
+</div>
+
+<div class="slider-container">
+  C
+  <input type="range" min="1" max="100" value="0" id="dxc"/>
+  <span id="valueDxc" class="slider-value">0</span>
+</div>
+
+<div class="slider-container">
+  P
+  <input type="range" min="1" max="100" value="0" id="dxp"/>
+  <span id="valueDxp" class="slider-value">0</span>
+</div>
+
+<div class="slider-container">
+  HA
+  <input type="range" min="0" max="30" value="0" id="dxh"/>
+  <span id="valueDxh" class="slider-value">0</span>
+</div>
+
+<h2>・使い方</h2>
+<p>
+  <h3>1.接続器をswモードに設定し接続器を再起動する</h3>
+  <h3>2.connectボタンを押し「ArduinoLeonald」を選択する</h3>
+  <h3>3.ボリュームで感度を設定する</h3>
+  <h3>4.saveボタンを押し接続器の感度を設定する</h3>
+  <h5>※swモードでも太鼓機能は動作します</h5>
+</p>
+<h2>・各項目の説明</h2>
+<h4>A</h4>
+例:a0が入力された後a0の入力を受け付けない時間
+<h4>B</h4>
+ a0,a1,a2,a3が入力された後a1,a2の入力を受け付けない時間
+<h4>C</h4>
+ a0,a1,a2,a3が入力された後a0,a3の入力を受け付けない時間
+ <h4>P</h4>
+ a0,a3が入力された後a1,a2の入力を受け付けない時間
+　<h4>HA</h4>
+ 基本は０です。メモ帳では反応するけどシュミレーターでだけ反応しない場合は数値を上げてください。
+  ※最新のファーウェアにアップデートする必要があります。
+  例(ドンダフルフェスティバル　18）（OpenTaiko　0）
+
+ <div style="border: #e23232 solid 4px; font-size: 100%; padding: 15px;"><p> <a href= "https://x.com/kasashiki" target="_blank" >お問合せ</a></p>
+  dmにお願いします！！
+   <p><a href="https://lit.link/kasashiki" target=" blank">その他リンク</a></p>
+   youtube,ブログ,販売やってます！！
+   <p>※不具合が発生する場合はこちら(旧バージョン用)</p>
+  <a href="https://kasasiki3.github.io/hidtaiko_webapp-For-older-versions/ver1.3/" target=" blank">旧バージョン</a>
+ </div>
+  <script>
+  function updateSliderValue(sliderId, valueId) {
+      let slider = document.getElementById(sliderId);
+      let value = document.getElementById(valueId);
+  
+      slider.addEventListener('input', function() {
+          value.textContent = this.value;
+      });
+  
+      // Initialize the value display
+      value.textContent = slider.value;
+  }
+  
+  updateSliderValue('dx0', 'valueDx0');
+  updateSliderValue('dx1', 'valueDx1');
+  updateSliderValue('dx2', 'valueDx2');
+  updateSliderValue('dx3', 'valueDx3');
+  updateSliderValue('dxa', 'valueDxa');
+  updateSliderValue('dxb', 'valueDxb');
+  updateSliderValue('dxc', 'valueDxc');
+  updateSliderValue('dxp', 'valueDxp');
+  updateSliderValue('dxh', 'valueDxh');
+  </script>
+  </body>
+</html>
